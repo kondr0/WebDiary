@@ -1,5 +1,6 @@
 package com.example.WebDiary.service;
 
+import com.example.WebDiary.exception.StudentNotFoundException;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,6 @@ public class StudentService {
     }
 
     public Student getStudentById(UUID id){
-        return studentRepository.getOne(id);
+        return studentRepository.findById(id).orElseThrow(() -> new StudentNotFoundException(id.toString()));
     }
 }
