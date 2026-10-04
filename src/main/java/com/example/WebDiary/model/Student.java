@@ -1,11 +1,10 @@
 package com.example.WebDiary.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +19,14 @@ public class Student {
     private String studyDirection;
     private int course;
     private String endOfStudying;
+
+    @ManyToMany
+    @JoinTable(
+            name = "student_event",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private Set<Event> events = new HashSet<>();
 
     public Student(String name, Date birthday, int presence, String studyDirection,
                    int course, String endOfStudying) {
@@ -88,5 +95,15 @@ public class Student {
 
     public void setEndOfStudying(String endOfStudying) {
         this.endOfStudying = endOfStudying;
+    }
+
+    public void addEvent(Event event) {
+        events.add(event);
+        event.getStudents().add(this);
+    }
+
+    public void removeEvent(Event event) {
+        events.remove(event);
+        event.getStudents().remove(this);
     }
 }

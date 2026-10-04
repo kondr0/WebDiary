@@ -1,14 +1,8 @@
 package com.example.WebDiary.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 public class Event {
@@ -17,9 +11,11 @@ public class Event {
     private UUID id;
     private String name;
     private Date date;
-    private List<String> students = new ArrayList<>();
 
-    public Event(String name, Date date, List<String> students) {
+    @ManyToMany(mappedBy = "events")
+    private Set<Student> students = new HashSet<>();
+
+    public Event(String name, Date date, Set<Student> students) {
         this.name = name;
         this.date = date;
         this.students = students;
@@ -29,11 +25,11 @@ public class Event {
         this.name = name;
     }
 
-    public void addStudent(String student) {
+    public void addStudent(Student student) {
         this.students.add(student);
     }
 
-    public void deleteStudent(String student) {
+    public void deleteStudent(Student student) {
         this.students.remove(student);
     }
 
@@ -44,7 +40,6 @@ public class Event {
     public void changeDate(Date date) {
         this.date = date;
     }
-
 
     public UUID getId() {
         return id;
@@ -66,11 +61,8 @@ public class Event {
         this.date = date;
     }
 
-    public List<String> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<String> students) {
-        this.students = students;
-    }
 }
