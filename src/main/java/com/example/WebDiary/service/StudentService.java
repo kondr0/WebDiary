@@ -1,6 +1,8 @@
 package com.example.WebDiary.service;
 
+import com.example.WebDiary.dto.StudentResponse;
 import com.example.WebDiary.exception.StudentNotFoundException;
+import com.example.WebDiary.mapper.StudentMapper;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.StudentRepository;
 import org.springframework.data.domain.Page;
@@ -11,14 +13,17 @@ import java.util.UUID;
 
 @Service
 public class StudentService {
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    private final StudentMapper studentMapper;
 
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
         this.studentRepository = studentRepository;
+        this.studentMapper = studentMapper;
     }
 
-    public Page<Student> getStudents(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+
+    public Page<StudentResponse> getStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable).map(studentMapper::toResponse);
     }
 
     public Student getStudentByName(String name){

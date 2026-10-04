@@ -1,21 +1,14 @@
 package com.example.WebDiary.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
-public class EventResponse {
 
-    private UUID id;
+public class EventRequest {
+
     private String name;
     private Date date;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public EventRequest() {}
 
     public String getName() {
         return name;

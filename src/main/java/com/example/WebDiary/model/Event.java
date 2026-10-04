@@ -15,6 +15,8 @@ public class Event {
     @ManyToMany(mappedBy = "events")
     private Set<Student> students = new HashSet<>();
 
+    public Event() {}
+
     public Event(String name, Date date, Set<Student> students) {
         this.name = name;
         this.date = date;

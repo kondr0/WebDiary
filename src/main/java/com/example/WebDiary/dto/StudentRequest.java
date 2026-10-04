@@ -1,27 +1,17 @@
 package com.example.WebDiary.dto;
 
 import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
 
-public class StudentResponse {
+public class StudentRequest {
 
-    private UUID id;
     private String name;
     private Date birthday;
     private int presence;
     private String studyDirection;
     private int course;
     private String endOfStudying;
-    private Set<EventResponse> events;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public StudentRequest() {}
 
     public String getName() {
         return name;
@@ -69,13 +59,5 @@ public class StudentResponse {
 
     public void setEndOfStudying(String endOfStudying) {
         this.endOfStudying = endOfStudying;
-    }
-
-    public Set<EventResponse> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<EventResponse> events) {
-        this.events = events;
     }
 }

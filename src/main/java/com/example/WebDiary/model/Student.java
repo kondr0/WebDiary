@@ -14,7 +14,6 @@ public class Student {
     private UUID id;
     private String name;
     private Date birthday;
-    private boolean showBirthday;
     private int presence;
     private String studyDirection;
     private int course;
@@ -28,6 +27,8 @@ public class Student {
     )
     private final Set<Event> events = new HashSet<>();
 
+    public Student() {}
+
     public Student(String name, Date birthday, int presence, String studyDirection,
                    int course, String endOfStudying) {
         this.name = name;
@@ -36,12 +37,12 @@ public class Student {
         this.studyDirection = studyDirection;
         this.course = course;
         this.endOfStudying = endOfStudying;
-        showBirthday = true;
     }
 
-    public void hideBirthday() {
-        showBirthday = false;
+    public Set<Event> getEvents() {
+        return events;
     }
+
 
     public UUID getId() {
         return id;
