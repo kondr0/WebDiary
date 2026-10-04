@@ -26,7 +26,7 @@ public class Student {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
-    private Set<Event> events = new HashSet<>();
+    private final Set<Event> events = new HashSet<>();
 
     public Student(String name, Date birthday, int presence, String studyDirection,
                    int course, String endOfStudying) {
@@ -42,8 +42,6 @@ public class Student {
     public void hideBirthday() {
         showBirthday = false;
     }
-
-
 
     public UUID getId() {
         return id;
