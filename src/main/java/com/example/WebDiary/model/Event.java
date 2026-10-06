@@ -43,6 +43,10 @@ public class Event {
         this.date = date;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public UUID getId() {
         return id;
     }

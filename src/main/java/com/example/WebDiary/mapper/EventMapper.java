@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class EventMapper {
 
-    public EventResponse toEventResponse(Event event)
+    public EventResponse toResponse(Event event)
     {
         EventResponse response = new EventResponse();
 
@@ -34,7 +34,7 @@ public class EventMapper {
 
     public Set<EventResponse> toResponseSet(Set<Event> events) {
         return events.stream()
-                .map(this::toEventResponse)
+                .map(this::toResponse)
                 .collect(Collectors.toSet());
     }
 }
