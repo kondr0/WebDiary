@@ -30,7 +30,7 @@ public class StudentService {
     }
 
     public StudentResponse getStudentById(UUID id){
-        return studentRepository.findById(id).stream().map(studentMapper::toResponse).findFirst().orElseThrow(() ->new StudentNotFoundException());
+        return studentRepository.findById(id).stream().map(studentMapper::toResponse).findFirst().orElseThrow(StudentNotFoundException::new);
 
     }
 
@@ -58,7 +58,7 @@ public class StudentService {
     }
 
     public StudentResponse getStudentByName(String name){
-        return studentRepository.findByName(name).stream().map(studentMapper::toResponse).findFirst().orElseThrow(() ->new StudentNotFoundException());
+        return studentRepository.findByName(name).stream().map(studentMapper::toResponse).findFirst().orElseThrow(StudentNotFoundException::new);
     }
 
 
