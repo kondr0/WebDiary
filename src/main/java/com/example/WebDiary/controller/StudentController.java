@@ -35,6 +35,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<StudentResponse> deleteStudentById(@PathVariable UUID id){
+        studentService.deleteStudentById(id);
         return  ResponseEntity.ok().build();
     }
 
