@@ -26,24 +26,24 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public EventResponse getEvent(UUID id) {
+    public EventResponse getEventById(UUID id) {
         return eventRepository.findById(id).stream().map(eventMapper::toResponse).findFirst().orElseThrow(EventNotFoundException::new);
     }
 
-    public EventResponse addEvent(EventRequest eventRequest) {
+    public EventResponse createEventById(EventRequest eventRequest) {
         Event event = eventMapper.toEntity(eventRequest);
         eventRepository.save(event);
         return eventMapper.toResponse(event);
     }
 
-    public EventResponse updateEvent(EventRequest eventRequest, UUID id) {
+    public EventResponse updateEventById(EventRequest eventRequest, UUID id) {
         Event event = eventMapper.toEntity(eventRequest);
         event.setId(id);
         eventRepository.save(event);
         return eventMapper.toResponse(event);
     }
 
-    public boolean deleteEvent(UUID id) {
+    public boolean deleteEventById(UUID id) {
         eventRepository.deleteById(id);
         return true;
     }
