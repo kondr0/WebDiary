@@ -47,14 +47,8 @@ public class StudentService {
         return studentMapper.toResponse(studentRepository.save(student));
     }
 
-    public boolean deleteStudentById(UUID id){
-        try{
-            studentRepository.deleteById(id);
-            return true;
-        }
-            catch (StudentNotFoundException e){
-            }
-        return false;
+    public void deleteStudentById(UUID id){
+        studentRepository.deleteById(id);
     }
 
     public StudentResponse getStudentByName(String name){
