@@ -4,78 +4,14 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
-public class StudentResponse {
-
-    private UUID id;
-    private String name;
-    private Date birthday;
-    private int presence;
-    private String studyDirection;
-    private int course;
-    private String endOfStudying;
-    private Set<EventResponse> events;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public int getPresence() {
-        return presence;
-    }
-
-    public void setPresence(int presence) {
-        this.presence = presence;
-    }
-
-    public String getStudyDirection() {
-        return studyDirection;
-    }
-
-    public void setStudyDirection(String studyDirection) {
-        this.studyDirection = studyDirection;
-    }
-
-    public int getCourse() {
-        return course;
-    }
-
-    public void setCourse(int course) {
-        this.course = course;
-    }
-
-    public String getEndOfStudying() {
-        return endOfStudying;
-    }
-
-    public void setEndOfStudying(String endOfStudying) {
-        this.endOfStudying = endOfStudying;
-    }
-
-    public Set<EventResponse> getEvents() {
-        return events;
-    }
-
-    public void setEvents(Set<EventResponse> events) {
-        this.events = events;
-    }
+public record StudentResponse(
+        UUID id,
+        String name,
+        Date birthday,
+        int presence,
+        String studyDirection,
+        int course,
+        String endOfStudying,
+        Set<EventResponse> events
+) {
 }

@@ -13,12 +13,7 @@ public class EventMapper {
 
     public EventResponse toResponse(Event event)
     {
-        EventResponse response = new EventResponse();
-
-        response.setId(event.getId());
-        response.setDate(event.getDate());
-        response.setName(event.getName());
-
+        EventResponse response = new EventResponse(event.getId(), event.getName(), event.getDate());
         return  response;
     }
 
@@ -26,8 +21,8 @@ public class EventMapper {
     {
         Event event = new Event();
 
-        event.setName(eventRequest.getName());
-        event.setDate(eventRequest.getDate());
+        event.setName(eventRequest.name());
+        event.setDate(eventRequest.date());
 
         return event;
     }
