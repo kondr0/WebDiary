@@ -1,5 +1,4 @@
 package com.example.WebDiary.controller;
-//TODO: remake dto to records
 //TODO: add unitTests
 import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.dto.EventResponse;
