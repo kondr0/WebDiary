@@ -1,5 +1,5 @@
 package com.example.WebDiary.controller;
-//TODO: add student adding to event
+//TODO: remake dto to records
 //TODO: add unitTests
 import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.dto.EventResponse;
@@ -39,5 +39,17 @@ public class EventController {
     public ResponseEntity<EventResponse> deleteStudentById(@PathVariable UUID id){
         eventService.deleteEventById(id);
         return  ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{events}")
+    public ResponseEntity<Void> addStudentToEvent(@RequestParam UUID eventId, @RequestParam UUID studentId){
+        eventService.addStudentToEvent(eventId, studentId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{events}")
+    public ResponseEntity<Void> deleteStudentFromEvent(@PathVariable UUID id){
+        eventService.deleteEventById(id);
+        return ResponseEntity.ok().build();
     }
 }
