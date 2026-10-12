@@ -29,32 +29,41 @@ public class StudentService {
         return studentRepository.findAll(pageable).map(studentMapper::toResponse);
     }
 
-    public StudentResponse getStudentById(UUID id){
-        return studentRepository.findById(id).stream().map(studentMapper::toResponse).findFirst().orElseThrow(StudentNotFoundException::new);
+    public StudentResponse getStudentById(UUID id) {
+        return studentRepository.findById(id).
+                map(studentMapper::toResponse).
+                orElseThrow(StudentNotFoundException::new);
 
     }
 
-    public StudentResponse createStudent(StudentRequest studentRequest){
+    public StudentResponse createStudent(StudentRequest request) {
 
-        Student student = studentMapper.toEntity(studentRequest);
-        return studentMapper.toResponse(student);
+        Student student = studentMapper.toEntity(request);
+        Student savedStudent = studentRepository.save(student);
+
+        return studentMapper.toResponse(savedStudent);
     }
 
-    public StudentResponse updateStudentById(StudentRequest studentRequest, UUID id){
-        Student student = studentMapper.toEntity(studentRequest);
-        student.setId(id);
-        studentRepository.save(student);
-        return studentMapper.toResponse(studentRepository.save(student));
+    public StudentResponse updateStudentById(StudentRequest request, UUID id
+    ) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(StudentNotFoundException::new);
+        Student updatedStudent = studentMapper.toEntity(request);
+        updatedStudent.setId(student.getId());
+        Student savedStudent = studentRepository.save(updatedStudent);
+
+        return studentMapper.toResponse(savedStudent);
     }
 
-    public void deleteStudentById(UUID id){
+    public void deleteStudentById(UUID id) {
         studentRepository.deleteById(id);
     }
 
-    public StudentResponse getStudentByName(String name){
-        return studentRepository.findByName(name).stream().map(studentMapper::toResponse).findFirst().orElseThrow(StudentNotFoundException::new);
+    public StudentResponse getStudentByName(String name) {
+        return studentRepository.findByName(name).stream().
+                map(studentMapper::toResponse).findFirst().
+                orElseThrow(StudentNotFoundException::new);
     }
-
 
 
 }
