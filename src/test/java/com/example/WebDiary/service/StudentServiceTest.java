@@ -8,6 +8,9 @@ import com.example.WebDiary.model.Event;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.StudentRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,11 +19,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -80,6 +84,17 @@ class StudentServiceTest {
 
     @Test
     void getStudents() {
+        Pageable pageable = Pageable.unpaged();
+        Page<Student> page = new PageImpl<>(List.of(student));
+
+        when(repository.findAll(pageable))
+                .thenReturn(page);
+        when(studentMapper.toResponse(student))
+                .thenReturn(response);
+
+        Page<StudentResponse> result = studentService.getStudents(pageable);
+
+        assertThat(result.getContent()).containsExactly(response);
     }
 
     @Test
@@ -98,8 +113,8 @@ class StudentServiceTest {
     @Test
     void createStudent() {
 
-        when(repository.findById(uuid))
-                .thenReturn(Optional.of(student));
+        when(repository.save(student))
+                .thenReturn(student);
 
         when(studentMapper.toResponse(student))
                 .thenReturn(response);
@@ -114,14 +129,36 @@ class StudentServiceTest {
 
     @Test
     void updateStudentById() {
+        when(repository.findById(uuid))
+                .thenReturn(Optional.of(student));
+        when(studentMapper.toEntity(request))
+                .thenReturn(student);
+        when(repository.save(student))
+                .thenReturn(student);
+        when(studentMapper.toResponse(student))
+                .thenReturn(response);
 
+        StudentResponse result = studentService.updateStudentById(request, uuid);
+
+        assertThat(result).isEqualTo(response);
     }
 
     @Test
     void deleteStudentById() {
+        studentService.deleteStudentById(uuid);
+
+        verify(repository).deleteById(uuid);
     }
 
     @Test
     void getStudentByName() {
+        when(repository.findByName("Nikolay"))
+                .thenReturn(Optional.of(student));
+        when(studentMapper.toResponse(student))
+                .thenReturn(response);
+
+        StudentResponse result = studentService.getStudentByName("Nikolay");
+
+        assertThat(result).isEqualTo(response);
     }
 }
