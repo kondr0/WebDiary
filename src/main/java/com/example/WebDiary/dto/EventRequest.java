@@ -1,9 +1,9 @@
 package com.example.WebDiary.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 public record EventRequest (
         String name,
-        Date date
+        LocalDate date
 ){}

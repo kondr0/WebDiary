@@ -1,13 +1,13 @@
 package com.example.WebDiary.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.UUID;
 
 public record StudentResponse(
         UUID id,
         String name,
-        Date birthday,
+        LocalDate birthday,
         int presence,
         String studyDirection,
         int course,

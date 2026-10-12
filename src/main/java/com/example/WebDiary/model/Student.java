@@ -2,7 +2,7 @@ package com.example.WebDiary.model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -13,7 +13,7 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    private Date birthday;
+    LocalDate birthday;
     private int presence;
     private String studyDirection;
     private int course;
@@ -29,8 +29,16 @@ public class Student {
 
     public Student() {}
 
-    public Student(String name, Date birthday, int presence, String studyDirection,
-                   int course, String endOfStudying) {
+    public Student(String name, LocalDate birthday, int presence, String studyDirection, int course, String endOfStudying) {
+        this.name = name;
+        this.birthday = birthday;
+        this.presence = presence;
+        this.studyDirection = studyDirection;
+        this.course = course;
+        this.endOfStudying = endOfStudying;
+    }
+
+    public Student(UUID id, String name, LocalDate birthday, int presence, String studyDirection, int course, String endOfStudying) {
         this.name = name;
         this.birthday = birthday;
         this.presence = presence;
@@ -59,11 +67,11 @@ public class Student {
         this.name = name;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

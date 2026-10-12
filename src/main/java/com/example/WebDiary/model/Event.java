@@ -2,6 +2,7 @@ package com.example.WebDiary.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -10,14 +11,14 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    private Date date;
+    private LocalDate date;
 
     @ManyToMany(mappedBy = "events")
     private Set<Student> students = new HashSet<>();
 
     public Event() {}
 
-    public Event(String name, Date date, Set<Student> students) {
+    public Event(String name, LocalDate  date, Set<Student> students) {
         this.name = name;
         this.date = date;
         this.students = students;
@@ -39,7 +40,7 @@ public class Event {
         this.name = newName;
     }
 
-    public void changeDate(Date date) {
+    public void changeDate(LocalDate date) {
         this.date = date;
     }
 
@@ -59,11 +60,11 @@ public class Event {
         this.name = name;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
