@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@RestController
+@RequestMapping("/api/events")
 public class EventController {
     EventService eventService;
 
