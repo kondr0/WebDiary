@@ -16,14 +16,14 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
     @Query("""
             SELECT s
-            FROM STUDENT s
+            FROM Student s
             ORDER BY s.name ASC
             """)
     List<Student> OrderedByName();
 
     @Query("""
             SELECT s
-            FROM STUDENT s
+            FROM Student s
             ORDER BY s.presence ASC
             """)
     List<Student> OrderedByPresence();
