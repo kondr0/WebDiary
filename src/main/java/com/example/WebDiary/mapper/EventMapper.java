@@ -1,8 +1,8 @@
 package com.example.WebDiary.mapper;
 
+import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.dto.EventResponse;
 import com.example.WebDiary.model.Event;
-import com.example.WebDiary.dto.EventRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

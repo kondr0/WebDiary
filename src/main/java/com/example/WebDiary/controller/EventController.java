@@ -1,10 +1,8 @@
 package com.example.WebDiary.controller;
 //TODO: add unitTests
+
 import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.dto.EventResponse;
-import com.example.WebDiary.dto.StudentRequest;
-import com.example.WebDiary.dto.StudentResponse;
-import com.example.WebDiary.model.Event;
 import com.example.WebDiary.service.EventService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

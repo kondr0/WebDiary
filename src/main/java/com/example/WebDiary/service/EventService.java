@@ -1,5 +1,6 @@
 package com.example.WebDiary.service;
 
+import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.dto.EventResponse;
 import com.example.WebDiary.exception.EventNotFoundException;
 import com.example.WebDiary.exception.StudentNotFoundException;
@@ -7,7 +8,6 @@ import com.example.WebDiary.mapper.EventMapper;
 import com.example.WebDiary.model.Event;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.EventRepository;
-import com.example.WebDiary.dto.EventRequest;
 import com.example.WebDiary.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -60,8 +60,11 @@ public class EventService {
     }
 
     public void addStudentToEvent(UUID eventId, UUID studentId) {
-        if (!studentRepository.existsById(eventId) || !studentRepository.existsById(studentId)) {
+        if (!studentRepository.existsById(studentId)) {
             throw new StudentNotFoundException();
+        }
+        if (!eventRepository.existsById(studentId)) {
+            throw new EventNotFoundException();
         }
 
         Student student = studentRepository.findById(studentId).orElseThrow(EventNotFoundException::new);
@@ -72,8 +75,11 @@ public class EventService {
     }
 
     public void deleteStudentFromEvent(UUID eventId, UUID studentId) {
-        if (!studentRepository.existsById(eventId) || !studentRepository.existsById(studentId)) {
+        if (!studentRepository.existsById(studentId)) {
             throw new StudentNotFoundException();
+        }
+        if (!eventRepository.existsById(studentId)) {
+            throw new EventNotFoundException();
         }
 
         Student student = studentRepository.findById(studentId).orElseThrow(EventNotFoundException::new);
