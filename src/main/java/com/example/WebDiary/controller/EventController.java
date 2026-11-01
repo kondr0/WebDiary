@@ -26,29 +26,29 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> updateStudentById(@Valid @RequestBody EventRequest eventRequest, @PathVariable UUID id){
+    public ResponseEntity<EventResponse> updateEventById(@Valid @RequestBody EventRequest eventRequest, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(eventService.updateEventById(eventRequest, id));
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> createStudent(@Valid @RequestBody EventRequest eventRequest){
+    public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody EventRequest eventRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEvent(eventRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<EventResponse> deleteStudentById(@PathVariable UUID id){
+    public ResponseEntity<EventResponse> deleteEventById(@PathVariable UUID id) {
         eventService.deleteEventById(id);
-        return  ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{eventId}/students/{studentId}")
-    public ResponseEntity<Void> addStudentToEvent(@PathVariable UUID eventId, @PathVariable UUID studentId){
+    public ResponseEntity<Void> addStudentToEvent(@PathVariable UUID eventId, @PathVariable UUID studentId) {
         eventService.addStudentToEvent(eventId, studentId);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{eventId}/students/{studentId}")
-    public ResponseEntity<Void> deleteStudentFromEvent(@PathVariable UUID eventId, @PathVariable UUID studentId){
+    public ResponseEntity<Void> deleteStudentFromEvent(@PathVariable UUID eventId, @PathVariable UUID studentId) {
         eventService.deleteStudentFromEvent(eventId, studentId);
         return ResponseEntity.ok().build();
     }

@@ -18,9 +18,10 @@ public class Event {
     @ManyToMany(mappedBy = "events")
     private Set<Student> students = new HashSet<>();
 
-    public Event() {}
+    public Event() {
+    }
 
-    public Event(String name, LocalDate  date, Set<Student> students) {
+    public Event(String name, LocalDate date, Set<Student> students) {
         this.name = name;
         this.date = date;
         this.students = students;

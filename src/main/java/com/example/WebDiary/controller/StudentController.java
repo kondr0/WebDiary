@@ -20,25 +20,26 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResponse> getStudentById(@PathVariable UUID id){
+    public ResponseEntity<StudentResponse> getStudentById(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponse> updateStudentById(@Valid @RequestBody StudentRequest studentRequest, @PathVariable UUID id){
+    public ResponseEntity<StudentResponse> updateStudentById(@Valid @RequestBody StudentRequest studentRequest, @PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(studentService.updateStudentById(studentRequest, id));
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponse> createStudent(@Valid @RequestBody StudentRequest studentRequest){
+    public ResponseEntity<StudentResponse> createStudent(@Valid @RequestBody StudentRequest studentRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(studentRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<StudentResponse> deleteStudentById(@PathVariable UUID id){
+    public ResponseEntity<StudentResponse> deleteStudentById(@PathVariable UUID id) {
         studentService.deleteStudentById(id);
-        return  ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
@@ -47,7 +48,7 @@ public class StudentController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<StudentResponse> getStudentByName(@RequestParam String name){
+    public ResponseEntity<StudentResponse> getStudentByName(@RequestParam String name) {
         return ResponseEntity.ok(studentService.getStudentByName(name));
     }
 }

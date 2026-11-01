@@ -10,6 +10,7 @@ import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.EventRepository;
 import com.example.WebDiary.repository.StudentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,8 +27,9 @@ public class EventService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Event> getEvents() {
-        return eventRepository.findAll();
+    @Transactional(readOnly = true)
+    public List<EventResponse> getEvents() {
+        return eventRepository.findAll().stream().map(eventMapper::toResponse).toList();
     }
 
     public EventResponse getEventById(UUID id) {

@@ -11,14 +11,12 @@ import java.util.stream.Collectors;
 @Component
 public class EventMapper {
 
-    public EventResponse toResponse(Event event)
-    {
+    public EventResponse toResponse(Event event) {
         EventResponse response = new EventResponse(event.getId(), event.getName(), event.getDate());
-        return  response;
+        return response;
     }
 
-    public Event toEntity(EventRequest eventRequest)
-    {
+    public Event toEntity(EventRequest eventRequest) {
         Event event = new Event();
 
         event.setName(eventRequest.name());

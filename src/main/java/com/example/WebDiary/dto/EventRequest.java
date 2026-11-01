@@ -7,7 +7,8 @@ import jakarta.validation.constraints.PastOrPresent;
 import java.time.LocalDate;
 
 
-public record EventRequest (
+public record EventRequest(
         @NotBlank String name,
         @NotNull @PastOrPresent LocalDate date
-){}
+) {
+}

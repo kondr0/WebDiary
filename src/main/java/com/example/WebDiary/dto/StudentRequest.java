@@ -14,4 +14,5 @@ public record StudentRequest(
         @NotBlank String studyDirection,
         @NotNull @Min(1) Integer course,
         @NotBlank String endOfStudying
-) {}
+) {
+}

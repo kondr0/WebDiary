@@ -27,7 +27,8 @@ public class Student {
     )
     private final Set<Event> events = new HashSet<>();
 
-    public Student() {}
+    public Student() {
+    }
 
     public Student(String name, LocalDate birthday, int presence, String studyDirection, int course, String endOfStudying) {
         this.name = name;

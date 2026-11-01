@@ -25,7 +25,7 @@ public class StudentMapper {
                 student.getCourse(),
                 student.getEndOfStudying(),
                 eventMapper.toResponseSet(student.getEvents())
-                );
+        );
 
         return response;
     }
@@ -43,7 +43,7 @@ public class StudentMapper {
         return student;
     }
 
-    public  Student updateStudent(Student student, StudentRequest studentRequest) {
+    public Student updateStudent(Student student, StudentRequest studentRequest) {
         student.setName(studentRequest.name());
         student.setBirthday(studentRequest.birthday());
         student.setPresence(studentRequest.presence());
