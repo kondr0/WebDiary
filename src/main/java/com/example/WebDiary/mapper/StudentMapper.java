@@ -43,4 +43,15 @@ public class StudentMapper {
         return student;
     }
 
+    public  Student updateStudent(Student student, StudentRequest studentRequest) {
+        student.setName(studentRequest.name());
+        student.setBirthday(studentRequest.birthday());
+        student.setPresence(studentRequest.presence());
+        student.setStudyDirection(studentRequest.studyDirection());
+        student.setCourse(studentRequest.course());
+        student.setEndOfStudying(studentRequest.endOfStudying());
+
+        return student;
+    }
+
 }

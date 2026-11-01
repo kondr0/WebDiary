@@ -6,6 +6,7 @@ import com.example.WebDiary.exception.StudentNotFoundException;
 import com.example.WebDiary.mapper.StudentMapper;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -44,15 +45,14 @@ public class StudentService {
         return studentMapper.toResponse(savedStudent);
     }
 
-    public StudentResponse updateStudentById(StudentRequest request, UUID id
-    ) {
+    @Transactional
+    public StudentResponse updateStudentById(StudentRequest request, UUID id) {
         Student student = studentRepository.findById(id)
                 .orElseThrow(StudentNotFoundException::new);
-        Student updatedStudent = studentMapper.toEntity(request);
-        updatedStudent.setId(student.getId());
-        Student savedStudent = studentRepository.save(updatedStudent);
 
-        return studentMapper.toResponse(savedStudent);
+        studentMapper.updateStudent(student, request);
+
+        return studentMapper.toResponse(student);
     }
 
     public void deleteStudentById(UUID id) {
