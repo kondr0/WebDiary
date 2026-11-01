@@ -51,7 +51,6 @@ class StudentServiceTest {
         birthday = LocalDate.of(2004, 3, 9);
         uuid = new UUID(1, 1);
         student = new Student(
-                uuid,
                 "Nikolay",
                 birthday,
                 9,

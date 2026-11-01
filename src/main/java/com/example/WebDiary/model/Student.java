@@ -38,15 +38,6 @@ public class Student {
         this.endOfStudying = endOfStudying;
     }
 
-    public Student(UUID id, String name, LocalDate birthday, int presence, String studyDirection, int course, String endOfStudying) {
-        this.name = name;
-        this.birthday = birthday;
-        this.presence = presence;
-        this.studyDirection = studyDirection;
-        this.course = course;
-        this.endOfStudying = endOfStudying;
-    }
-
     public Set<Event> getEvents() {
         return events;
     }
