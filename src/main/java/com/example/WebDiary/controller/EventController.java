@@ -42,15 +42,15 @@ public class EventController {
         return  ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{events}")
-    public ResponseEntity<Void> addStudentToEvent(@RequestParam UUID eventId, @RequestParam UUID studentId){
+    @PutMapping("/{eventId}/students/{studentId}")
+    public ResponseEntity<Void> addStudentToEvent(@PathVariable UUID eventId, @PathVariable UUID studentId){
         eventService.addStudentToEvent(eventId, studentId);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{events}")
-    public ResponseEntity<Void> deleteStudentFromEvent(@PathVariable UUID id){
-        eventService.deleteEventById(id);
+    @DeleteMapping("/{eventId}/students/{studentId}")
+    public ResponseEntity<Void> deleteStudentFromEvent(@PathVariable UUID eventId, @PathVariable UUID studentId){
+        eventService.deleteStudentFromEvent(eventId, studentId);
         return ResponseEntity.ok().build();
     }
 }
