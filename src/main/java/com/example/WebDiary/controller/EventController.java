@@ -6,6 +6,7 @@ import com.example.WebDiary.dto.StudentRequest;
 import com.example.WebDiary.dto.StudentResponse;
 import com.example.WebDiary.model.Event;
 import com.example.WebDiary.service.EventService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,12 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventResponse> updateStudentById(@RequestBody EventRequest eventRequest, @PathVariable UUID id){
+    public ResponseEntity<EventResponse> updateStudentById(@Valid @RequestBody EventRequest eventRequest, @PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(eventService.updateEventById(eventRequest, id));
     }
 
     @PostMapping
-    public ResponseEntity<EventResponse> createStudent(@RequestBody EventRequest eventRequest){
+    public ResponseEntity<EventResponse> createStudent(@Valid @RequestBody EventRequest eventRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEventById(eventRequest));
     }
 

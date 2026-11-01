@@ -3,6 +3,7 @@ package com.example.WebDiary.controller;
 import com.example.WebDiary.dto.StudentRequest;
 import com.example.WebDiary.dto.StudentResponse;
 import com.example.WebDiary.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -25,12 +26,12 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponse> updateStudentById(@RequestBody StudentRequest studentRequest, @PathVariable UUID id){
+    public ResponseEntity<StudentResponse> updateStudentById(@Valid @RequestBody StudentRequest studentRequest, @PathVariable UUID id){
         return ResponseEntity.status(HttpStatus.OK).body(studentService.updateStudentById(studentRequest, id));
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest studentRequest){
+    public ResponseEntity<StudentResponse> createStudent(@Valid @RequestBody StudentRequest studentRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(studentRequest));
     }
 
