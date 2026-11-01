@@ -34,7 +34,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventResponse> createStudent(@Valid @RequestBody EventRequest eventRequest){
-        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEventById(eventRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(eventService.createEvent(eventRequest));
     }
 
     @DeleteMapping("/{id}")

@@ -1,10 +1,9 @@
 package com.example.WebDiary.service;
 
 import com.example.WebDiary.dto.EventResponse;
-import com.example.WebDiary.dto.StudentRequest;
 import com.example.WebDiary.exception.EventNotFoundException;
+import com.example.WebDiary.exception.StudentNotFoundException;
 import com.example.WebDiary.mapper.EventMapper;
-import com.example.WebDiary.mapper.StudentMapper;
 import com.example.WebDiary.model.Event;
 import com.example.WebDiary.model.Student;
 import com.example.WebDiary.repository.EventRepository;
@@ -13,7 +12,6 @@ import com.example.WebDiary.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -36,25 +34,36 @@ public class EventService {
         return eventRepository.findById(id).stream().map(eventMapper::toResponse).findFirst().orElseThrow(EventNotFoundException::new);
     }
 
-    public EventResponse createEventById(EventRequest eventRequest) {
+    public EventResponse createEvent(EventRequest eventRequest) {
         Event event = eventMapper.toEntity(eventRequest);
         eventRepository.save(event);
         return eventMapper.toResponse(event);
     }
 
     public EventResponse updateEventById(EventRequest eventRequest, UUID id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException();
+        }
+
         Event event = eventMapper.toEntity(eventRequest);
         event.setId(id);
         eventRepository.save(event);
         return eventMapper.toResponse(event);
     }
 
-    public boolean deleteEventById(UUID id) {
+    public void deleteEventById(UUID id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException();
+        }
+
         eventRepository.deleteById(id);
-        return true;
     }
 
     public void addStudentToEvent(UUID eventId, UUID studentId) {
+        if (!studentRepository.existsById(eventId) || !studentRepository.existsById(studentId)) {
+            throw new StudentNotFoundException();
+        }
+
         Student student = studentRepository.findById(studentId).orElseThrow(EventNotFoundException::new);
         Event event = eventRepository.findById(eventId).orElseThrow(EventNotFoundException::new);
         student.addEvent(event);
@@ -63,6 +72,10 @@ public class EventService {
     }
 
     public void deleteStudentFromEvent(UUID eventId, UUID studentId) {
+        if (!studentRepository.existsById(eventId) || !studentRepository.existsById(studentId)) {
+            throw new StudentNotFoundException();
+        }
+
         Student student = studentRepository.findById(studentId).orElseThrow(EventNotFoundException::new);
         Event event = eventRepository.findById(eventId).orElseThrow(EventNotFoundException::new);
         student.removeEvent(event);

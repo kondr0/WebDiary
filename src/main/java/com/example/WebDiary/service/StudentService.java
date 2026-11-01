@@ -47,6 +47,10 @@ public class StudentService {
 
     @Transactional
     public StudentResponse updateStudentById(StudentRequest request, UUID id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException();
+        }
+
         Student student = studentRepository.findById(id)
                 .orElseThrow(StudentNotFoundException::new);
 
@@ -56,6 +60,9 @@ public class StudentService {
     }
 
     public void deleteStudentById(UUID id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException();
+        }
         studentRepository.deleteById(id);
     }
 
