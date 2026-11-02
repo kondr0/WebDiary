@@ -19,9 +19,9 @@ public class Student {
     private int course;
     private String endOfStudying;
 
-    @ManyToMany
+    @OneToMany
     @JoinTable(
-            name = "student_event",
+            name = "student_attendance",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )

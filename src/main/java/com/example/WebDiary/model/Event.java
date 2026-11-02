@@ -1,5 +1,6 @@
 package com.example.WebDiary.model;
 
+import com.example.WebDiary.model.enums.EventType;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ public class Event {
     private UUID id;
     private String name;
     private LocalDate date;
+    private EventType eventType;
 
     @ManyToMany(mappedBy = "events")
     private Set<Student> students = new HashSet<>();
